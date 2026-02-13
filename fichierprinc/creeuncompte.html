@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte</title>
+            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+            <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+
+            <header class="reveal">
+<nav class="bg-[#1e213a] py-4 px-6 md:px-12 w-full relative z-20 border-b border-[#d8c09d]/20">
+    <div class="max-w-[1600px] mx-auto flex justify-between items-center">
+        
+        <a href="/index.html">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] flex items-center justify-center bg-transparent text-[#d8c09d]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 md:w-8 md:h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
+                    </svg>
+                </div>
+                <div class="text-[#d8c09d] font-serif uppercase tracking-widest leading-tight text-xs md:text-base">
+                    Traducteur<br>Expert<br>Thaïlandaise
+                </div>
+            </div>
+        </a>
+
+        <button id="menu-btn" class="md:hidden text-[#d8c09d] focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+
+        <div id="menu-links" class="hidden absolute top-full left-0 w-full bg-[#1e213a] border-b border-[#d8c09d]/20 p-6 flex-col space-y-4 md:static md:w-auto md:bg-transparent md:border-none md:p-0 md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 md:block text-white/90 text-sm font-medium tracking-wide z-50">
+            <a href="/index.html" class="hover:text-[#d8c09d] transition-colors block">Accueil</a>
+            <a href="/service.html" class="hover:text-[#d8c09d] transition-colors block">Services</a>
+            <a href="/contact.html" class="hover:text-[#d8c09d] transition-colors block">Contact</a>
+            
+            <div class="flex flex-col md:flex-row gap-4 pt-4 md:pt-0">
+                <a href="/loginclient.html" class="flex items-center justify-center gap-2 px-5 py-2 border border-[#d8c09d] text-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-widest text-center">
+                    Espace Client
+                </a>
+                <a href="/loginadmin.html" class="flex items-center justify-center gap-2 px-5 py-2 border border-white/30 text-white hover:bg-white hover:text-[#1e213a] transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-widest text-center">
+                    Espace Admin
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</nav>
+
+
+<script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu-links');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+    });
+</script>
+    </header>
+
+
+
+
+
+<!-- principal -->
+<div class="min-h-screen flex items-center justify-center px-4">
+
+  <div class="bg-white shadow-lg border border-gray-100 rounded-2xl p-8 max-w-md w-full">
+
+    <!-- logo -->
+    <div class="flex justify-center mb-6">
+      <img src="../img/logo.png" alt="Logo" class="w-24 h-24 object-contain" />
+    </div>
+
+    <!-- titre -->
+    <h1 class="text-2xl font-bold text-center mb-2">Créer un compte</h1>
+    <p class="text-sm text-gray-600 text-center mb-6">
+      Accédez à votre espace client en quelques secondes
+    </p>
+
+   <!-- form -->
+<form class="space-y-4" action="/register" method="POST">
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Nom complet</label>
+    <input type="text"
+           name="nom"
+           class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500"
+           placeholder="Votre nom"
+           required />
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Adresse e-mail</label>
+    <input type="email"
+           name="email"
+           class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500"
+           placeholder="exemple@mail.com"
+           required />
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Mot de passe</label>
+    <input type="password"
+           name="password"
+           class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500"
+           placeholder="••••••••"
+           required />
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium mb-1">Confirmer le mot de passe</label>
+    <input type="password"
+           name="confirm"
+           class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500"
+           placeholder="••••••••"
+           required />
+  </div>
+
+  <button type="submit"
+          class="w-full py-2.5 rounded-full bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700">
+    Créer mon compte
+  </button>
+
+</form>
+
+
+    <!-- lien -->
+    <div class="text-center mt-6">
+      <p class="text-sm text-gray-600">
+        Vous avez déjà un compte ?
+        <a href="loginclient.html" class="text-emerald-600 hover:underline">Se connecter</a>
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer class="bg-gray-900 text-gray-300 py-10 ">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <a href="#" class="text-sm tracking-wide hover:text-white transition">
+        Mentions légales
+      </a>
+
+      <p class="text-sm tracking-wide">
+        © 2026 — <span class="font-semibold text-white">Sabjon Mali</span>
+      </p>
+
+    </div>
+
+    <div class="mt-6 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
+      Tous droits réservés.
+    </div>
+
+  </div>
+</footer>
+</body>
+</html>

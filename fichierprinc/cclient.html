@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Client – Tableau de Bord</title>
+    <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+        .animate-fade-in { animation: fadeInUp 0.4s ease-out forwards; }
+    </style>
+</head>
+
+<body class="bg-[#F9F7F2] min-h-screen flex flex-col">
+
+    <nav class="bg-[#1e213a] py-4 px-6 md:px-12 border-b border-[#d8c09d]/20">
+        <div class="max-w-[1600px] mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] flex items-center justify-center text-[#d8c09d]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
+                    </svg>
+                </div>
+                <div class="text-[#d8c09d] font-serif uppercase tracking-widest text-xs md:text-base">
+                    Traducteur<br>Expert<br>Thaïlandaise
+                </div>
+            </a>
+            <a href="loginclient.html" class="text-[#d8c09d] border border-[#d8c09d] px-4 py-2 rounded-sm text-xs uppercase tracking-widest hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all">
+                Déconnexion
+            </a>
+        </div>
+    </nav>
+
+<main class="flex-grow px-6 py-12 fade">
+        <div class="max-w-4xl mx-auto bg-white shadow-xl border border-gray-100 rounded-2xl p-10 mb-12">
+            <h1 class="text-3xl font-serif text-[#1e213a] font-bold mb-6 text-center">
+                Bienvenue, <span id="clientNameDisplay" class="text-[#d8c09d]">Client</span>
+            </h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button onclick="filtrerDocuments('admin')" class="text-left p-6 bg-[#F9F7F2] border border-gray-200 rounded-xl shadow-sm hover:border-[#d8c09d] hover:bg-white transition-all group">
+                    <h2 class="text-lg font-bold text-[#1e213a] mb-2 group-hover:text-[#d8c09d]">Mes traductions</h2>
+                    <p class="text-gray-600 text-sm mb-4">Voir les documents reçus de l'expert.</p>
+                    <span class="text-emerald-600 font-semibold text-sm">Accéder aux fichiers reçus →</span>
+                </button>
+
+                <button onclick="filtrerDocuments('all')" class="text-left p-6 bg-[#F9F7F2] border border-gray-200 rounded-xl shadow-sm hover:border-[#d8c09d] hover:bg-white transition-all group">
+                    <h2 class="text-lg font-bold text-[#1e213a] mb-2 group-hover:text-[#d8c09d]">Mes documents</h2>
+                    <p class="text-gray-600 text-sm mb-4">Historique de tous vos fichiers partagés.</p>
+                    <span class="text-emerald-600 font-semibold text-sm">Voir tout l'historique →</span>
+                </button>
+
+                <div class="p-6 bg-[#F9F7F2] border border-gray-200 rounded-xl shadow-sm relative group">
+                    <h2 class="text-lg font-bold text-[#1e213a] mb-2">Mon compte</h2>
+                    <p id="infoEmail" class="text-gray-500 text-xs truncate mb-1 italic font-bold">...</p>
+                    <p class="text-gray-400 text-[10px] uppercase tracking-tighter">Statut : Client Vérifié</p>
+                    <div class="mt-4 flex gap-2">
+                         <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                         <span class="text-[10px] text-gray-400 font-bold uppercase">Compte Actif</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100">
+            <div class="bg-[#1e213a] p-6 flex items-center justify-between">
+                <div class="flex flex-col">
+                    <h2 id="chatTitle" class="text-[#d8c09d] font-serif uppercase tracking-[0.2em] text-sm md:text-base font-bold">
+                        Centre d'assistance & Échanges
+                    </h2>
+                    <button id="btnResetFilter" onclick="chargerMessages()" class="hidden text-[10px] text-emerald-400 underline uppercase mt-1 text-left">Afficher toute la discussion</button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span class="text-[#d8c09d]/60 text-[10px] uppercase tracking-widest">Support Actif</span>
+                </div>
+            </div>
+
+            <div id="messagesBox" class="h-[400px] overflow-y-auto p-6 bg-[#fdfcf9] space-y-6 scrollbar-thin">
+                </div>
+
+            <div class="p-6 bg-white border-t border-gray-100">
+                <form id="uploadForm" enctype="multipart/form-data" class="space-y-4">
+                    <input type="hidden" id="clientEmailField" name="client_email">
+                    <textarea name="message" rows="3" required 
+                        class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-[#1e213a] outline-none transition-all resize-none text-sm" 
+                        placeholder="Écrivez votre message à l'expert..."></textarea>
+                    
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-grow">
+                            <label class="group flex items-center justify-center gap-3 p-3 bg-white border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
+                                <span class="text-xs text-gray-500 group-hover:text-emerald-700 font-medium italic">Joindre un document</span>
+                                <input type="file" name="document" class="hidden" onchange="updateFileName(this)">
+                            </label>
+                            <div id="fileNameDisplay" class="text-[10px] text-emerald-600 mt-1 ml-2 font-bold hidden"></div>
+                        </div>
+                        <button type="submit" class="bg-[#1e213a] text-[#d8c09d] px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#2c2e43] transition-all">
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 py-10 ">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm tracking-wide">© 2026 — <span class="font-semibold text-white">Sabjon Mali</span></p>
+        </div>
+    </footer>
+
+   <script>
+        const clientEmail = localStorage.getItem("client_email");
+        document.getElementById("clientEmailField").value = clientEmail;
+        document.getElementById("infoEmail").innerText = clientEmail;
+
+        function chargerMessages(filter = null) {
+            fetch(`/api/messages/${clientEmail}`)
+                .then(res => res.json())
+                .then(data => {
+                    const box = document.getElementById("messagesBox");
+                    const btnReset = document.getElementById("btnResetFilter");
+                    const chatTitle = document.getElementById("chatTitle");
+
+                    // on gere l'affichage du bouton de retour si on filtre
+                    if (filter) {
+                        btnReset.classList.remove("hidden");
+                        chatTitle.innerText = filter === 'admin' ? "Traduction" : "Tous mes documents";
+                        // on filtre les données
+                        if (filter === 'admin') data = data.filter(m => m.expediteur === 'admin' && m.document_url);
+                        else data = data.filter(m => m.document_url);
+                    } else {
+                        btnReset.classList.add("hidden");
+                        chatTitle.innerText = "Centre d'assistance & Échanges";
+                    }
+
+                    if (data.length === 0) {
+                        box.innerHTML = `<div class="h-full flex items-center justify-center text-gray-400 italic">Aucun document ou message trouvé.</div>`;
+                        return;
+                    }
+
+                    box.innerHTML = "";
+                    data.forEach(msg => {
+                        const isClient = msg.expediteur === "client";
+                        const docHtml = msg.document_url 
+                            ? `<a href="/${msg.document_url}" target="_blank" class="mt-3 flex items-center gap-2 p-2 bg-black/5 rounded border border-black/10 hover:bg-black/10 transition-all">
+                                 <span class="text-[10px] font-bold uppercase underline text-[#1e213a]">📎 Voir le fichier</span>
+                               </a>` : "";
+
+                        box.innerHTML += `
+                            <div class="flex ${isClient ? 'justify-end' : 'justify-start'} animate-fade-in">
+                                <div class="max-w-[80%] ${isClient ? 'bg-[#d8c09d] text-[#1e213a] rounded-t-2xl rounded-bl-2xl shadow-lg' : 'bg-white border border-gray-100 text-gray-800 rounded-t-2xl rounded-br-2xl shadow-md'} p-4">
+                                    <p class="text-sm leading-relaxed">${msg.message}</p>
+                                    ${docHtml}
+                                    <div class="mt-2 flex items-center justify-end gap-2 opacity-50 text-[9px] uppercase font-bold">
+                                        <span>${new Date(msg.date_envoi).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                    box.scrollTop = box.scrollHeight;
+                });
+        }
+
+        // une fonction liée aux boutons du haut
+        function filtrerDocuments(type) {
+            chargerMessages(type);
+            // on scrolle vers le chat pour que l'utilisateur voie le résultat
+            document.getElementById('chatTitle').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateFileName(input) {
+            const display = document.getElementById("fileNameDisplay");
+            if (input.files && input.files[0]) {
+                display.innerText = "Prêt : " + input.files[0].name;
+                display.classList.remove("hidden");
+            }
+        }
+
+        const uploadForm = document.getElementById("uploadForm");
+        uploadForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/clientmessage', { method: 'POST', body: formData })
+            .then(res => {
+                if (res.ok) {
+                    this.reset();
+                    document.getElementById("fileNameDisplay").classList.add("hidden");
+                    chargerMessages();
+                }
+            });
+        });
+
+        setInterval(() => {
+            // on ne rafraîchit pas automatiquement si un filtre est actif pour ne pas perturber l'utilisateur
+            if (document.getElementById("btnResetFilter").classList.contains("hidden")) {
+                chargerMessages();
+            }
+        }, 5000);
+
+        chargerMessages();
+    </script>
+</body>
+</html>

@@ -1,15 +1,16 @@
-require('dotenv').config();
+// j'ai mis en commentaire comment j'ai organiser le server pas vous expliquer comment j'ai fait
+equire('dotenv').config();
 const nodemailer = require('nodemailer');
-const crypto = require('crypto'); // Inclus par défaut dans Node.js
+const crypto = require('crypto'); // ca c'est juste inclut par défaut dans node.js quand on l'installe monsieur
 const express = require('express');
 const mysql = require('mysql2');
-const multer = require('multer'); // <--- AJOUTÉ : Pour gérer les fichiers
+const multer = require('multer'); // <---  pour gérer les fichiers (est les mdp oublier)
 const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// --- CONFIGURATION MULTER ---
+// --- config multer ---
 const storage = multer.diskStorage({
   destination: (req, file, cb) => { cb(null, 'uploads/'); },
   filename: (req, file, cb) => { cb(null, Date.now() + '-' + file.originalname); }
@@ -17,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // ----------------------
-// MIDDLEWARES
+// middlwaire (ce qui se passe avant la page charger)
 // ----------------------
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 // ----------------------
-// connexion mysql ici
+// connexion mysql 
 // ----------------------
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -46,10 +47,10 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    console.error('❌ Erreur de connexion MySQL :', err);
+    console.error('❌ erreur de connexion MySQL :', err);
     return;
   }
-  console.log('✅ Connecté à MySQL (base projet)');
+  console.log('✅ connecté à MySQL (base projet)');
 });
 
 
@@ -197,10 +198,10 @@ app.post('/envoyerdemande', (req, res) => {
 
 app.post('/envoyermessage', upload.single('document'), (req, res) => {
   const { client_email, message } = req.body;
-  // On récupère le fichier s'il y en a un
+  // ici on récupère le fichier s'il y en a un
   const document_url = req.file ? `/uploads/${req.file.filename}` : null;
 
-  // On ajoute document_url dans l'INSERT
+  // est ici on ajoute document_url dans l'insert
   const sql = "INSERT INTO messages (client_email, message, expediteur, document_url) VALUES (?, ?, 'admin', ?)";
 
   db.query(sql, [client_email, message, document_url], (err, result) => {
@@ -227,7 +228,7 @@ app.get('/api/messages/:email', (req, res) => {
   });
 });
 
-// --- ROUTE CLIENTMESSAGE MODIFIÉE ---
+// --- route client message modifier---
 app.post('/clientmessage', upload.single('document'), (req, res) => {
   const { client_email, message } = req.body;
   const document_url = req.file ? `/uploads/${req.file.filename}` : null;
@@ -244,7 +245,7 @@ app.post('/clientmessage', upload.single('document'), (req, res) => {
       return res.status(500).send("Erreur serveur");
     }
 
-    res.status(200).send("OK"); // On répond OK pour le script AJAX
+    res.status(200).send("OK"); // on répond okkkk pour le script ajax
   });
 });
 
@@ -298,7 +299,7 @@ app.post('/loginadmin', (req, res) => {
 });
 
 
-// Route pour le moteur de recherche admin (filtre par email ou nom)
+// ca c'est la route pour le moteur de recherche admin (filtre par email ou nom)
 app.get('/api/recherche_clients', (req, res) => {
   const search = req.query.q;
   const sql = "SELECT nom, email FROM clients WHERE email LIKE ? OR nom LIKE ? LIMIT 10";

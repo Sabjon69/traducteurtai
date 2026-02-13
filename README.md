@@ -12,7 +12,3 @@ taper : `npm start`
 puis ouvrir : `http://localhost:3000` <!-- la c'est en local mais vous ajuster comme vous voulez  -->
 
 
-## structure dossier
-- `/public` : Images, CSS, HTML
-- `/routes` : Logique du serveur
-- `server.js` : Point d'entrée.# finprojet

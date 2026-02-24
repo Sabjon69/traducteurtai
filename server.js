@@ -1,5 +1,5 @@
 // j'ai mis en commentaire comment j'ai organiser le server pas vous expliquer comment j'ai fait
-equire('dotenv').config();
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 const crypto = require('crypto'); // ca c'est juste inclut par défaut dans node.js quand on l'installe monsieur
 const express = require('express');

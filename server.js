@@ -315,5 +315,5 @@ app.get('/api/recherche_clients', (req, res) => {
 // serveur lancée
 // ----------------------
 app.listen(port, () => {
-  console.log(`🚀 Serveur démarré sur http://localhost:${port}`);
+  console.log(`ok: Serveur démarré sur http://localhost:${port}`);
 });

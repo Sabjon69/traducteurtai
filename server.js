@@ -102,10 +102,10 @@ app.post('/forgot-password', (req, res) => {
 
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          console.error("❌ Erreur Nodemailer :", error); 
+          console.error(" Erreur Nodemailer :", error); 
           return res.status(500).send("Erreur lors de l'envoi de l'email.");
         }
-        console.log("✅ Email envoyé avec succès : " + info.response);
+        console.log(" Email envoyé avec succès : " + info.response);
         res.status(200).send("Email de récupération envoyé ! Vérifiez votre boîte mail.");
       });
     });
@@ -148,7 +148,7 @@ app.post('/register', (req, res) => {
       return res.status(500).send("Erreur lors de l'inscription");
     }
 
-    console.log("✅ Nouveau client inscrit :", email);
+    console.log(" Nouveau client inscrit :", email);
     res.redirect('/loginclient.html');
   });
 });
@@ -285,7 +285,7 @@ app.post('/loginadmin', (req, res) => {
   const sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
   db.query(sql, [username, password], (err, results) => {
     if (err) {
-      console.error("❌ Erreur SQL :", err);
+      console.error(" Erreur SQL :", err);
       return res.status(500).send("Erreur serveur");
     }
 
@@ -293,7 +293,7 @@ app.post('/loginadmin', (req, res) => {
       return res.status(401).redirect("./erreurlogin.html")
     }
 
-    console.log("🔐 Connexion ADMIN :", username);
+    console.log(" Connexion ADMIN :", username);
     res.redirect('/cadmin.html'); 
   });
 });

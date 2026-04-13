@@ -1,10 +1,12 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin</title>
+    <title>Administration | Expert Thaïlandais</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-   <link rel="icon" type="image/png" href="/img/logo.png">
+    <link rel="icon" type="image/png" href="/img/logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,130 +14,133 @@
 
     <style>
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .reveal { opacity: 0; animation: fadeInUp 0.8s ease-out forwards; }
+        
+        /* Correction : On s'assure que le menu mobile ne tremble pas */
+        #menu-links {
+            transition: all 0.3s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-[#F9F7F2]">
+<body class="bg-[#F9F7F2] min-h-screen flex flex-col font-['Lato']">
 
-    <header class="reveal">
-<nav class="bg-[#1e213a] py-4 px-6 md:px-12 w-full sticky top-0 z-50 border-b border-[#d8c09d]/20">
-    <div class="max-w-[1600px] mx-auto flex justify-between items-center">
-        <a href="/" class="hover:opacity-80 transition-opacity">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] flex items-center justify-center bg-transparent text-[#d8c09d]">
-                   <img src="/img/logo.png" alt="">
-                </div>
-                <div class="text-[#d8c09d] font-serif uppercase tracking-widest leading-tight text-xs md:text-base">
-                    Traducteur<br>Expert<br>Thaïlandais
+    <header class="relative z-[100]">
+        <nav class="bg-[#1e213a] py-4 px-6 md:px-12 w-full border-b border-[#d8c09d]/20 relative">
+            <div class="max-w-[1600px] mx-auto flex justify-between items-center">
+                
+                <a href="/" class="hover:opacity-80 transition-opacity relative z-[110]">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] flex items-center justify-center overflow-hidden bg-[#1e213a]">
+                           <img src="/img/logo.png" alt="Logo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-[#d8c09d] font-serif uppercase tracking-widest leading-tight text-xs md:text-base">
+                            Traducteur<br>Expert<br>Thaïlandais
+                        </div>
+                    </div>
+                </a>
+
+                <button id="menu-btn" class="md:hidden text-[#d8c09d] p-2 focus:outline-none relative z-[110] cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9 pointer-events-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+
+                <div id="menu-links" class="hidden absolute top-full left-0 w-full bg-[#1e213a] border-b border-[#d8c09d]/30 p-8 flex-col space-y-6 md:static md:w-auto md:bg-transparent md:border-none md:p-0 md:flex md:flex-row md:items-center md:space-y-0 md:space-x-8 text-white text-sm font-medium tracking-widest z-[100] shadow-2xl md:shadow-none uppercase">
+                    <a href="/" class="hover:text-[#d8c09d] transition-colors py-2 border-b border-white/5 md:border-none">Accueil</a>
+                    <a href="/service" class="hover:text-[#d8c09d] transition-colors py-2 border-b border-white/5 md:border-none">Services</a>
+                    <a href="/contact" class="hover:text-[#d8c09d] transition-colors py-2 border-b border-white/5 md:border-none">Contact</a>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 pt-4 md:pt-0">
+                        <a href="/loginclient" class="px-6 py-3 border border-[#d8c09d] text-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all duration-300 text-xs font-bold text-center">
+                            Espace Client
+                        </a>
+                        <a href="/loginadmin" class="px-6 py-3 border border-white/40 text-white hover:bg-white hover:text-[#1e213a] transition-all duration-300 text-xs font-bold text-center">
+                            Espace Admin
+                        </a>
+                    </div>
                 </div>
             </div>
-        </a>
-
-        <button id="menu-btn" class="md:hidden text-[#d8c09d] focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </button>
-
-        <div id="menu-links" class="hidden absolute top-full left-0 w-full bg-[#1e213a] border-b border-[#d8c09d]/20 p-6 flex-col space-y-4 md:static md:w-auto md:bg-transparent md:border-none md:p-0 md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 text-white/90 text-sm font-medium tracking-wide z-50">
-            <a href="/" class="hover:text-[#d8c09d] transition-colors block">Accueil</a>
-            <a href="/service" class="hover:text-[#d8c09d] transition-colors block">Services</a>
-            <a href="/contact" class="hover:text-[#d8c09d] transition-colors block">Contact</a>
-            
-            <div class="flex flex-col md:flex-row gap-4 pt-4 md:pt-0">
-                <a href="/loginclient" class="px-5 py-2 border border-[#d8c09d] text-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-widest text-center">
-                    Espace Client
-                </a>
-                <a href="/loginadmin" class="px-5 py-2 border border-white/30 text-white hover:bg-white hover:text-[#1e213a] transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-widest text-center">
-                    Espace Admin
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<script>
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu-links');
-
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        menu.classList.toggle('flex');
-    });
-</script>
+        </nav>
     </header>
     
-    <div class="min-h-[80vh] flex items-center justify-center px-4 reveal">
-
-        <div class="bg-white shadow-2xl border border-gray-100 rounded-sm p-10 max-w-md w-full relative">
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#1e213a] text-[#d8c09d] text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-1 rounded-full shadow-md">
+    <main class="flex-grow flex items-center justify-center px-4 py-20 relative z-10">
+        <div class="bg-white shadow-2xl rounded-sm p-10 max-w-md w-full relative reveal">
+            
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#1e213a] text-[#d8c09d] text-[10px] font-bold uppercase tracking-[0.2em] px-5 py-1.5 rounded-full shadow-lg z-20">
                 Accès Restreint
             </div>
 
-            <div class="text-center mb-8">
-                <h1 class="text-[#1e213a] font-serif text-3xl uppercase tracking-widest mb-2">Administration</h1>
-                <div class="w-12 h-1 bg-[#c5a47e] mx-auto"></div>
-                <p class="text-xs text-gray-500 mt-4 uppercase tracking-widest font-medium">
-                    Veuillez vous authentifier
-                </p>
+            <div class="text-center mb-10">
+                <h1 class="text-[#1e213a] font-serif text-3xl uppercase tracking-[0.1em] mb-3">Administration</h1>
+                <div class="w-16 h-0.5 bg-[#c5a47e] mx-auto"></div>
+                <p class="text-[10px] text-gray-400 mt-5 uppercase tracking-[0.2em] font-bold">Identification requise</p>
             </div>
 
-            <form class="space-y-6"  action="/loginadmin" method="POST">
-
-                <div>
-                    <label class="block text-[#1e213a] text-xs font-bold uppercase tracking-widest mb-2">Identifiant Expert</label>
+            <form class="space-y-8" action="/loginadmin" method="POST">
+                <div class="relative">
+                    <label class="block text-[#1e213a] text-[10px] font-black uppercase tracking-widest mb-2">Identifiant</label>
                     <input type="text" name="username" required
-                           class="w-full border-b-2 border-gray-200 bg-transparent px-0 py-2 text-sm focus:outline-none focus:border-[#1e213a] transition-colors"
-                           placeholder="Nom d'utilisateur" />
+                           class="w-full border-b border-gray-300 bg-transparent py-3 text-sm focus:outline-none focus:border-[#c5a47e] transition-colors"
+                           placeholder="admin" />
                 </div>
 
-                <div>
-                    <label class="block text-[#1e213a] text-xs font-bold uppercase tracking-widest mb-2">Mot de passe</label>
+                <div class="relative">
+                    <label class="block text-[#1e213a] text-[10px] font-black uppercase tracking-widest mb-2">Mot de passe</label>
                     <input type="password" name="password" required
-                           class="w-full border-b-2 border-gray-200 bg-transparent px-0 py-2 text-sm focus:outline-none focus:border-[#1e213a] transition-colors"
+                           class="w-full border-b border-gray-300 bg-transparent py-3 text-sm focus:outline-none focus:border-[#c5a47e] transition-colors"
                            placeholder="••••••••" />
                 </div>
 
-                <div class="pt-4">
+                <div class="pt-6">
                     <button type="submit"
-                            class="w-full py-4 bg-[#1e213a] text-[#d8c09d] text-xs font-bold uppercase tracking-[0.3em] hover:bg-[#2c2e43] transition-all duration-300 shadow-lg">
+                            class="w-full py-5 bg-[#1e213a] text-[#d8c09d] text-xs font-bold uppercase tracking-[0.3em] hover:bg-[#2c2e43] transition-all duration-500 shadow-xl cursor-pointer">
                         S'authentifier
                     </button>
                 </div>
-
             </form>
-
-
-
         </div>
+    </main>
 
-    </div>
+    <footer class="bg-[#1e213a] text-gray-400 py-10 border-t border-[#d8c09d]/10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <p class="text-[10px] uppercase tracking-widest">© 2026 — Sabjon Mali</p>
+            <div class="flex gap-8 text-[10px] uppercase tracking-widest">
+                <a href="#" class="hover:text-white transition">Mentions</a>
+                <a href="/contact" class="hover:text-white transition">Support</a>
+            </div>
+        </div>
+    </footer>
 
+    <script>
+        // On attend que le DOM soit prêt
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('menu-btn');
+            const menu = document.getElementById('menu-links');
 
+            if (btn && menu) {
+                btn.onclick = (e) => {
+                    e.preventDefault(); // Empêche tout comportement bizarre
+                    e.stopPropagation(); // Évite que le clic "traverse" vers les couches du dessous
+                    
+                    console.log("Clic détecté !"); // Vérification console
+                    
+                    // On bascule les classes
+                    menu.classList.toggle('hidden');
+                    menu.classList.toggle('flex');
+                };
 
-    <footer class="bg-gray-900 text-gray-300 py-10 ">
-  <div class="max-w-6xl mx-auto px-4">
-
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-
-      <a href="#" class="text-sm tracking-wide hover:text-white transition">
-        Mentions légales
-      </a>
-
-      <p class="text-sm tracking-wide">
-        © 2026 — <span class="font-semibold text-white">Sabjon Mali</span>
-      </p>
-
-    </div>
-
-    <div class="mt-6 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
-      Tous droits réservés.
-    </div>
-
-  </div>
-</footer>
+                // Fermer le menu si on clique ailleurs sur l'écran
+                document.onclick = (e) => {
+                    if (!menu.contains(e.target) && e.target !== btn) {
+                        menu.classList.add('hidden');
+                        menu.classList.remove('flex');
+                    }
+                };
+            }
+        });
+    </script>
 </body>
 </html>

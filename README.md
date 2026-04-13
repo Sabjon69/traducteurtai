@@ -1,4 +1,4 @@
-#  projet - [sabjon mali]
+#  projet - sabjon mali
 
 voici monsieur le prototype fonctionnel du projet
 

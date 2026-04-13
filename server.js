@@ -46,21 +46,25 @@ app.get('/', (req, res) => {
 // ----------------------
 // connexion mysql 
 // ----------------------
-const db = mysql.createConnection({
+// ----------------------
+// connexion mysql 
+// ----------------------
+// On utilise DATABASE_URL (fournie par Railway) ou les variables individuelles
+const db = mysql.createConnection(process.env.DATABASE_URL || {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME || "projet", // <--- AJOUT RAILWAY
-  port: process.env.DB_PORT || 3306,         // <--- AJOUT RAILWAY
-  ssl: { rejectUnauthorized: false }         // <--- AJOUT RAILWAY (requis par la plupart des BDD en ligne)
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306,
+  ssl: { rejectUnauthorized: false }
 });
 
 db.connect((err) => {
   if (err) {
-    console.error('❌ erreur de connexion MySQL :', err);
+    console.error(' erreur de connexion sql :', err);
     return;
   }
-  console.log('✅ connecté à MySQL (base projet)');
+  console.log(' connecté à MySQL ');
 });
 
 

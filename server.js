@@ -6,9 +6,17 @@ const express = require('express');
 const mysql = require('mysql2');
 const multer = require('multer'); // <---  pour gérer les fichiers (est les mdp oublier)
 const path = require('path');
+const fs = require('fs'); // <--- AJOUT RAILWAY : permet de lire et créer des dossiers
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// --- AJOUT RAILWAY : Créer le dossier uploads s'il n'existe pas ---
+// (Railway efface parfois les dossiers vides, ça évite que le serveur plante)
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 
 // --- config multer ---
 const storage = multer.diskStorage({
@@ -42,7 +50,9 @@ const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: "projet"
+  database: process.env.DB_NAME || "projet", // <--- AJOUT RAILWAY
+  port: process.env.DB_PORT || 3306,         // <--- AJOUT RAILWAY
+  ssl: { rejectUnauthorized: false }         // <--- AJOUT RAILWAY (requis par la plupart des BDD en ligne)
 });
 
 db.connect((err) => {
@@ -79,8 +89,9 @@ app.post('/forgot-password', (req, res) => {
     db.query("UPDATE clients SET reset_token = ?, reset_expires = ? WHERE email = ?", 
     [token, expires, email], (err) => {
       
-      // 4. envoyer l'email
-      const resetLink = `http://192.168.1.63:3000/reset-password.html?token=${token}`;
+      // 4. envoyer l'email (MODIFIÉ POUR RAILWAY : on utilise l'URL en ligne au lieu de 192.168.x.x)
+      const appUrl = process.env.APP_URL || `http://localhost:${port}`;
+      const resetLink = `${appUrl}/reset-password.html?token=${token}`;
       
       const mailOptions = {
         from: `"Expert Sabjon Mali" <${process.env.EMAIL_USER}>`, 

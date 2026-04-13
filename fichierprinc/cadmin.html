@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panneau Admin – Expert Sabjon</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="icon" type="image/svg+xml" href="../img/logo.png">
+    <link rel="icon" type="image/png" href="/img/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
@@ -55,15 +55,15 @@
 <header class="reveal">
     <nav class="bg-[#1e213a] py-4 px-6 md:px-12 border-b border-[#d8c09d]/20 shadow-lg">
         <div class="max-w-[1600px] mx-auto flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-4">
+            <a href="/" class="flex items-center gap-4">
                 <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] flex items-center justify-center text-[#d8c09d]">
-                    <img src="../img/logo.png" alt="">
+                    <img src="/img/logo.png" alt="">
                 </div>
                 <div class="text-[#d8c09d] font-serif uppercase tracking-widest text-xs md:text-base leading-tight">
                     Traducteur<br>Expert<br>Thaïlandaise
                 </div>
             </a>
-            <a href="index.html" class="text-[#d8c09d] border border-[#d8c09d] px-4 py-2 rounded-sm text-xs uppercase tracking-widest hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all font-bold">
+            <a href="/" class="text-[#d8c09d] border border-[#d8c09d] px-4 py-2 rounded-sm text-xs uppercase tracking-widest hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all font-bold">
                 Déconnexion
             </a>
         </div>
@@ -209,7 +209,6 @@
         }
     }
 
-    // --- 1) demande ---
     function chargerDemandes() {
         fetch('/api/demandes')
         .then(res => res.json())
@@ -247,7 +246,6 @@
         chargerDemandes();
     }
 
-    // --- 2) liste de conversations  ---
     function chargerListeMessages() {
         fetch('/api/messages_clients')
         .then(res => res.json())
@@ -256,7 +254,6 @@
             const dot = document.getElementById('notifMessages');
             const lastSeenTime = localStorage.getItem('lastMsgTime') || "1970-01-01T00:00:00";
             
-            //  filtre pour ne compter que les nouveaux messages venant du client
             const nouveaux = data.filter(c => new Date(c.last_message) > new Date(lastSeenTime)).length;
 
             if (nouveaux > 0) {
@@ -291,12 +288,10 @@
     }
 
     function markMsgRead(time) {
-        // on met à jour l'heure de lecture pour faire baisser le compteur de 1
         localStorage.setItem('lastMsgTime', time);
         chargerListeMessages(); 
     }
 
-    // --- 3) logique chat ---
     function ouvrirChat(email) {
         selectedEmail = email;
         document.getElementById("adminClientEmail").value = email;
@@ -305,7 +300,6 @@
         document.getElementById("chatFilters").classList.remove("hidden");
         currentFilter = null;
         chargerMessagesAdmin();
-        // on rafraîchit la liste pour marquer comme lu visuellement
         chargerListeMessages();
     }
 
@@ -359,9 +353,7 @@
     setInterval(chargerListeMessages, 5000);
     setInterval(() => { if(!currentFilter && selectedEmail) chargerMessagesAdmin(); }, 3000);
 
-    // --- reset est notif en moins quand => repondu D ---
     document.getElementById('formAdmin').addEventListener('submit', function() {
-        // on considère que si on répond, on a "lu" les messages de ce client
         const now = new Date().toISOString();
         localStorage.setItem('lastMsgTime', now); 
 
@@ -369,7 +361,7 @@
             document.getElementById('fileNameDisplay').classList.add('hidden');
             this.reset();
             document.getElementById("adminClientEmail").value = selectedEmail;
-            chargerListeMessages(); // le compteur baisse immédiatement après l'envoi
+            chargerListeMessages();
         }, 500);
     });
 </script>

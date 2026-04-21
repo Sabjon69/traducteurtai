@@ -4,224 +4,248 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traducteur Expert Thaïlandais — Accueil</title>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="icon" type="image/png" href="/img/logo.png">
-
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/png" href="/img/logo.png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
+    
     <style>
-        :root {
-            --font-serif: "Playfair Display", serif;
-            --font-sans: "Lato", sans-serif;
+        :root { 
+            --font-serif: "Playfair Display", serif; 
+            --font-sans: "Lato", sans-serif; 
         }
-        body { font-family: var(--font-sans); scroll-behavior: smooth; }
+        body { 
+            font-family: var(--font-sans); 
+            scroll-behavior: smooth; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #Fdfcf8;
+        }
         h1, h2, h3, .serif-font { font-family: var(--font-serif); }
 
+        /* Animations de révélation au scroll */
         .reveal { 
             opacity: 0; 
             transform: translateY(30px); 
-            transition: all 0.8s ease-out; 
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
         }
         .reveal.active { 
             opacity: 1; 
             transform: translateY(0); 
         }
-        
         .delay-1 { transition-delay: 0.2s; }
         .delay-2 { transition-delay: 0.4s; }
         .delay-3 { transition-delay: 0.6s; }
 
-        /* Animation de succès */
-        .success-animation {
-            animation: scaleIn 0.5s ease-out forwards;
+        /* Animation de succès formulaire */
+        .success-animation { 
+            animation: scaleIn 0.5s ease-out forwards; 
         }
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        @keyframes scaleIn { 
+            from { transform: scale(0.9); opacity: 0; } 
+            to { transform: scale(1); opacity: 1; } 
         }
+
+        /* Personnalisation de la scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e213a; }
+        ::-webkit-scrollbar-thumb { background: #d8c09d; border-radius: 10px; }
     </style>
 </head>
-<body class="m-0 p-0 bg-[#Fdfcf8] text-gray-900">
 
-<nav class="bg-[#1e213a] py-4 px-6 md:px-12 w-full sticky top-0 z-50 border-b border-[#d8c09d]/20">
-    <div class="max-w-[1600px] mx-auto flex justify-between items-center">
-        <a href="/" class="hover:opacity-80 transition-opacity">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] flex items-center justify-center bg-transparent text-[#d8c09d]">
-                   <img src="/img/logo.png" alt="">
-                </div>
-                <div class="text-[#d8c09d] font-serif uppercase tracking-widest leading-tight text-xs md:text-base">
-                    Traducteur<br>Expert<br>Thaïlandais
-                </div>
-            </div>
-        </a>
+<body class="text-gray-900 overflow-x-hidden">
 
-        <button id="menu-btn" class="md:hidden text-[#d8c09d] focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </button>
-
-        <div id="menu-links" class="hidden absolute top-full left-0 w-full bg-[#1e213a] border-b border-[#d8c09d]/20 p-6 flex-col space-y-4 md:static md:w-auto md:bg-transparent md:border-none md:p-0 md:flex md:flex-row md:items-center md:space-y-0 md:space-x-6 text-white/90 text-sm font-medium tracking-wide z-50">
-            <a href="/" class="hover:text-[#d8c09d] transition-colors block">Accueil</a>
-            <a href="/service" class="hover:text-[#d8c09d] transition-colors block">Services</a>
-            <a href="/contact" class="hover:text-[#d8c09d] transition-colors block">Contact</a>
+    <nav class="bg-[#1e213a]/95 backdrop-blur-md py-4 px-6 md:px-12 w-full sticky top-0 z-[100] border-b border-[#d8c09d]/20 shadow-lg">
+        <div class="max-w-[1600px] mx-auto flex justify-between items-center">
             
-            <div class="flex flex-col md:flex-row gap-4 pt-4 md:pt-0">
-                <a href="/loginclient" class="px-5 py-2 border border-[#d8c09d] text-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-widest text-center">
-                    Espace Client
-                </a>
-                <a href="/loginadmin" class="px-5 py-2 border border-white/30 text-white hover:bg-white hover:text-[#1e213a] transition-all duration-300 rounded-sm text-xs font-bold uppercase tracking-widest text-center">
-                    Espace Admin
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<header class="relative w-full h-[85vh] flex items-center overflow-hidden" 
-        style="background-color: #1e213a;">
-    
-    <div class="absolute inset-0 z-0">
-        <img src="/img/imageimp.png" 
-             alt="Background" 
-             class="w-full h-full object-cover"
-             style="object-position: center 75%; filter: brightness(0.4);">
-    </div>
-
-    <div class="relative z-10 container mx-auto px-6 md:px-12 lg:px-20">
-        <h1 class="reveal text-[#d8c09d] text-5xl md:text-7xl mb-6 leading-tight max-w-4xl font-serif">
-            Services juridiques <br> de premier ordre
-        </h1>
-        <p class="reveal delay-1 text-gray-200 text-lg md:text-xl font-light max-w-2xl mb-10 leading-relaxed">
-            Nous accompagnons chaque situation vers des solutions juridiques claires et sereines, avec une expertise certifiée en langue thaïe.
-        </p>
-        <div class="reveal delay-2">
-            <a href="#about" class="inline-block bg-[#d8c09d] hover:bg-[#c5a47e] text-[#1e213a] font-bold text-sm tracking-widest px-8 py-4 uppercase transition-all duration-300 shadow-lg transform hover:-translate-y-1">
-                Découvrir l'expertise
+            <a href="/" class="hover:opacity-80 transition-opacity flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#d8c09d] overflow-hidden flex items-center justify-center bg-[#1e213a]">
+                       <img src="/img/logo.png" alt="Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-[#d8c09d] font-serif uppercase tracking-widest leading-tight text-[10px] md:text-sm">
+                        Traducteur<br>Expert<br>Thaïlandais
+                    </div>
+                </div>
             </a>
-        </div>
-    </div>
-</header>
 
-<section id="about" class="bg-white py-24 px-6 md:px-12 lg:px-24">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
-        <div class="reveal w-full md:w-1/2">
-            <img src="/img/image.png" alt="Portrait M. KIRATIHONGSAKUN" class="w-full h-auto object-cover rounded-sm shadow-2xl border-white border-8">
-        </div>
-        <div class="reveal delay-1 w-full md:w-1/2 flex flex-col space-y-6">
-            <h2 class="text-[#1e213a] font-serif text-3xl md:text-4xl uppercase tracking-widest border-b border-[#d8c09d] pb-4">
-                M. KIRATIHONGSAKUN
-            </h2>
-            <div class="text-gray-700 leading-relaxed space-y-4 text-lg font-light">
-                <p>En tant que <span class="font-bold text-[#1e213a]">traducteur assermenté</span> en langue thaïe et expert judiciaire, je réalise des traductions officielles reconnues par les administrations françaises et thaïlandaises.</p>
-                <p>Spécialisé dans le domaine juridique et administratif, mon rôle est de sécuriser vos échanges et vos documents officiels avec une précision absolue.</p>
-            </div>
-            <div class="pt-4">
-                <a href="/service" class="inline-block bg-[#1e213a] text-[#d8c09d] border border-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] font-bold py-3 px-8 transition-all duration-300 uppercase text-xs tracking-widest">
-                    Nos services détaillés
+            <button id="menu-btn" class="md:hidden text-[#d8c09d] p-2 hover:bg-white/10 rounded-lg transition-colors focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+
+            <div id="menu-links" class="hidden absolute top-full left-0 w-full bg-[#1e213a] border-b border-[#d8c09d]/20 p-6 flex-col space-y-4 md:static md:w-auto md:bg-transparent md:border-none md:p-0 md:flex md:flex-row md:items-center md:space-y-0 md:space-x-8 text-white/90 text-sm font-semibold tracking-wide shadow-2xl md:shadow-none">
+                
+                <a href="/" class="hover:text-[#d8c09d] transition-colors relative group py-2">
+                    Accueil
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#d8c09d] transition-all group-hover:w-full"></span>
                 </a>
+                <a href="/service" class="hover:text-[#d8c09d] transition-colors relative group py-2">
+                    Services
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#d8c09d] transition-all group-hover:w-full"></span>
+                </a>
+                <a href="/contact" class="hover:text-[#d8c09d] transition-colors relative group py-2">
+                    Contact
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#d8c09d] transition-all group-hover:w-full"></span>
+                </a>
+                
+                <div class="flex flex-col md:flex-row gap-3 pt-4 md:pt-0">
+                    <a href="/loginclient" class="px-5 py-2.5 border border-[#d8c09d] text-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] transition-all duration-300 rounded-md text-[11px] font-bold uppercase tracking-widest text-center">
+                        Espace Client
+                    </a>
+                    <a href="/loginadmin" class="px-5 py-2.5 bg-white/10 border border-white/20 text-white hover:bg-white hover:text-[#1e213a] transition-all duration-300 rounded-md text-[11px] font-bold uppercase tracking-widest text-center">
+                        Espace Admin
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </nav>
 
-<section id="contact-form" class="bg-[#1e213a] py-20 px-6">
-    <div class="reveal max-w-3xl mx-auto bg-white shadow-2xl rounded-sm p-8 md:p-12 transition-all duration-500" id="formContainer">
-        <div class="text-center mb-10">
-            <h2 class="text-2xl font-serif text-[#1e213a] uppercase tracking-widest inline-block border-b border-[#d8c09d] pb-2">Prise de rendez-vous</h2>
-            <p class="text-gray-500 mt-4 font-light">Réponse garantie sous 24h ouvrées</p>
+    <header class="relative w-full h-[85vh] flex items-center overflow-hidden bg-[#1e213a]">
+        <div class="absolute inset-0 z-0">
+            <img src="/img/imageimp.png" alt="Background" class="w-full h-full object-cover" style="object-position: center 75%; filter: brightness(0.4);">
         </div>
         
-        <form id="demandeForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="md:col-span-2">
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Nom complet</label>
-                <input type="text" name="nom" required class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" />
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Courriel</label>
-                <input type="email" name="email" required class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" />
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Téléphone</label>
-                <input type="tel" name="telephone" class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" />
-            </div>
-            <div class="md:col-span-2">
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Type de document</label>
-                <select name="type_document" class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none bg-white">
-                    <option>Acte d’état civil</option>
-                    <option>Contrat / Accord commercial</option>
-                    <option>Jugement de divorce / Garde</option>
-                    <option>Autre document juridique</option>
-                </select>
-            </div>
-            <div class="md:col-span-2">
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Message</label>
-                <textarea name="message" rows="3" class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" placeholder="Décrivez brièvement votre besoin..."></textarea>
-            </div>
-            <div class="md:col-span-2 pt-4">
-                <button type="submit" id="submitBtn" class="w-full py-4 bg-[#1e213a] text-[#d8c09d] text-sm font-bold uppercase tracking-widest hover:bg-[#2c2e43] transition-all transform hover:scale-[1.01]">
-                    Envoyer la demande
-                </button>
-            </div>
-        </form>
-    </div>
-</section>
-
-<section class="relative w-full py-24 bg-cover bg-center bg-no-repeat overflow-hidden" 
-         style="background-image: linear-gradient(rgba(30, 33, 58, 0.92), rgba(30, 33, 58, 0.92)), url('3.svg');">
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-        <div class="reveal text-center mb-16">
-            <h2 class="text-[#d8c09d] font-serif text-5xl md:text-6xl mb-4">Retours clients</h2>
-            <div class="w-24 h-1 bg-[#d8c09d] mx-auto mb-6"></div>
-            <p class="text-white text-xl md:text-2xl font-light italic">L'excellence au service de vos projets</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="reveal border border-[#d8c09d]/30 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between hover:border-[#d8c09d] transition-all duration-500 group">
-                <div class="mb-6">
-                    <span class="text-[#d8c09d] text-5xl font-serif leading-none group-hover:scale-110 inline-block transition-transform">“</span>
-                    <div class="flex text-[#d8c09d] mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <p class="text-gray-200 leading-relaxed italic mt-2">
-                        Une aide précieuse pour la traduction de mes actes de mariage. Travail rigoureux et accepté immédiatement en préfecture.
-                    </p>
-                </div>
-                <p class="text-[#d8c09d] font-bold tracking-widest uppercase text-sm">— Anne Beauvin</p>
-            </div>
-
-            <div class="reveal delay-1 border border-[#d8c09d]/30 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between hover:border-[#d8c09d] transition-all duration-500 group">
-                <div class="mb-6">
-                    <span class="text-[#d8c09d] text-5xl font-serif leading-none group-hover:scale-110 inline-block transition-transform">“</span>
-                    <div class="flex text-[#d8c09d] mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <p class="text-gray-200 leading-relaxed italic mt-2">
-                        Le service a été impeccable pour mes documents juridiques. Une réactivité exemplaire et un professionnalisme rassurant pour mes démarches.
-                    </p>
-                </div>
-                <p class="text-[#d8c09d] font-bold tracking-widest uppercase text-sm">— Karima Bennani</p>
-            </div>
-
-            <div class="reveal delay-2 border border-[#d8c09d]/30 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between hover:border-[#d8c09d] transition-all duration-500 group">
-                <div class="mb-6">
-                    <span class="text-[#d8c09d] text-5xl font-serif leading-none group-hover:scale-110 inline-block transition-transform">“</span>
-                    <div class="flex text-[#d8c09d] mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <p class="text-gray-200 leading-relaxed italic mt-2">
-                        Une expertise rare. L'accompagnement sur les dossiers complexes fait toute la différence. Je recommande vivement ce cabinet.
-                    </p>
-                </div>
-                <p class="text-[#d8c09d] font-bold tracking-widest uppercase text-sm">— Robert Carlun</p>
+        <div class="relative z-10 container mx-auto px-6 md:px-12 lg:px-20">
+            <h1 class="reveal text-[#d8c09d] text-5xl md:text-7xl mb-6 leading-tight max-w-4xl font-serif">
+                Services juridiques <br> de premier ordre
+            </h1>
+            <p class="reveal delay-1 text-gray-200 text-lg md:text-xl font-light max-w-2xl mb-10 leading-relaxed">
+                Nous accompagnons chaque situation vers des solutions juridiques claires et sereines, avec une expertise certifiée en langue thaïe.
+            </p>
+            <div class="reveal delay-2">
+                <a href="#about" class="inline-block bg-[#d8c09d] hover:bg-[#c5a47e] text-[#1e213a] font-bold text-sm tracking-widest px-8 py-4 uppercase transition-all duration-300 shadow-lg transform hover:-translate-y-1">
+                    Découvrir l'expertise
+                </a>
             </div>
         </div>
-    </div>
-</section>
+    </header>
+
+    <section id="about" class="bg-white py-24 px-6 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="reveal w-full md:w-1/2">
+                <div class="relative group">
+                    <div class="absolute -inset-4 border-2 border-[#d8c09d]/30 rounded-sm translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform"></div>
+                    <img src="/img/image.png" alt="Portrait M. KIRATIHONGSAKUN" class="w-full h-auto object-cover rounded-sm shadow-2xl border-white border-8">
+                </div>
+            </div>
+            <div class="reveal delay-1 w-full md:w-1/2 flex flex-col space-y-6">
+                <h2 class="text-[#1e213a] font-serif text-3xl md:text-4xl uppercase tracking-widest border-b border-[#d8c09d] pb-4">
+                    M. KIRATIHONGSAKUN
+                </h2>
+                <div class="text-gray-700 leading-relaxed space-y-4 text-lg font-light">
+                    <p>
+                        En tant que <span class="font-bold text-[#1e213a]">traducteur assermenté</span> en langue thaïe et expert judiciaire près la Cour d'Appel, je réalise des traductions officielles reconnues par les administrations françaises et thaïlandaises.
+                    </p>
+                    <p>
+                        Spécialisé dans le domaine juridique, administratif et commercial, mon rôle est de sécuriser vos échanges et vos documents officiels avec une précision absolue et une totale confidentialité.
+                    </p>
+                </div>
+                <div class="pt-4">
+                    <a href="/service" class="inline-block bg-[#1e213a] text-[#d8c09d] border border-[#d8c09d] hover:bg-[#d8c09d] hover:text-[#1e213a] font-bold py-3 px-8 transition-all duration-300 uppercase text-xs tracking-widest">
+                        Nos services détaillés
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-form" class="bg-[#1e213a] py-20 px-6">
+        <div class="reveal max-w-3xl mx-auto bg-white shadow-2xl rounded-sm p-8 md:p-12 transition-all duration-500" id="formContainer">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-serif text-[#1e213a] uppercase tracking-widest inline-block border-b border-[#d8c09d] pb-2">Prise de rendez-vous</h2>
+                <p class="text-gray-500 mt-4 font-light">Réponse garantie sous 24h ouvrées</p>
+            </div>
+            
+            <form id="demandeForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Nom complet</label>
+                    <input type="text" name="nom" required class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" />
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Courriel</label>
+                    <input type="email" name="email" required class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" />
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Téléphone</label>
+                    <input type="tel" name="telephone" class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" />
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Type de document</label>
+                    <select name="type_document" class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none bg-white">
+                        <option>Acte d’état civil</option>
+                        <option>Contrat / Accord commercial</option>
+                        <option>Jugement de divorce / Garde</option>
+                        <option>Autre document juridique</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Message</label>
+                    <textarea name="message" rows="3" class="w-full border-b border-gray-200 py-2 focus:border-[#d8c09d] outline-none transition-colors" placeholder="Décrivez brièvement votre besoin..."></textarea>
+                </div>
+                <div class="md:col-span-2 pt-4">
+                    <button type="submit" id="submitBtn" class="w-full py-4 bg-[#1e213a] text-[#d8c09d] text-sm font-bold uppercase tracking-widest hover:bg-[#2c2e43] transition-all transform hover:scale-[1.01]">
+                        Envoyer la demande
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="relative w-full py-24 bg-cover bg-center bg-no-repeat overflow-hidden" style="background-image: linear-gradient(rgba(30, 33, 58, 0.95), rgba(30, 33, 58, 0.95)), url('/img/3.svg');">
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="reveal text-center mb-16">
+                <h2 class="text-[#d8c09d] font-serif text-5xl md:text-6xl mb-4">Retours clients</h2>
+                <div class="w-24 h-1 bg-[#d8c09d] mx-auto mb-6"></div>
+                <p class="text-white text-xl md:text-2xl font-light italic">L'excellence au service de vos projets</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="reveal border border-[#d8c09d]/30 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between hover:border-[#d8c09d] transition-all duration-500 group">
+                    <div class="mb-6">
+                        <span class="text-[#d8c09d] text-5xl font-serif leading-none group-hover:scale-110 inline-block transition-transform">“</span>
+                        <div class="flex text-[#d8c09d] mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="text-gray-200 leading-relaxed italic mt-2">
+                            Une aide précieuse pour la traduction de mes actes de mariage. Travail rigoureux et accepté immédiatement en préfecture.
+                        </p>
+                    </div>
+                    <p class="text-[#d8c09d] font-bold tracking-widest uppercase text-sm">— Anne Beauvin</p>
+                </div>
+
+                <div class="reveal delay-1 border border-[#d8c09d]/30 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between hover:border-[#d8c09d] transition-all duration-500 group">
+                    <div class="mb-6">
+                        <span class="text-[#d8c09d] text-5xl font-serif leading-none group-hover:scale-110 inline-block transition-transform">“</span>
+                        <div class="flex text-[#d8c09d] mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="text-gray-200 leading-relaxed italic mt-2">
+                            Le service a été impeccable pour mes documents juridiques. Une réactivité exemplaire et un professionnalisme rassurant.
+                        </p>
+                    </div>
+                    <p class="text-[#d8c09d] font-bold tracking-widest uppercase text-sm">— Karima Bennani</p>
+                </div>
+
+                <div class="reveal delay-2 border border-[#d8c09d]/30 bg-white/5 backdrop-blur-sm p-8 flex flex-col justify-between hover:border-[#d8c09d] transition-all duration-500 group">
+                    <div class="mb-6">
+                        <span class="text-[#d8c09d] text-5xl font-serif leading-none group-hover:scale-110 inline-block transition-transform">“</span>
+                        <div class="flex text-[#d8c09d] mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="text-gray-200 leading-relaxed italic mt-2">
+                            Une expertise rare. L'accompagnement sur les dossiers complexes fait toute la différence. Je recommande vivement ce cabinet.
+                        </p>
+                    </div>
+                    <p class="text-[#d8c09d] font-bold tracking-widest uppercase text-sm">— Robert Carlun</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <footer class="bg-gray-900 text-gray-300 py-10 ">
   <div class="max-w-6xl mx-auto px-4">
@@ -245,66 +269,93 @@
   </div>
 </footer>
 
-<script>
-    // --- menu mobile ---
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu-links');
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        menu.classList.toggle('flex');
-    });
+    <script>
+        // 1. GESTION MENU MOBILE
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu-links');
 
-    // --- animation au scroll ---
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('active');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
         });
-    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // --- gestion envoie du formulaire sans redirection ---
-    const demandeForm = document.getElementById('demandeForm');
-    const formContainer = document.getElementById('formContainer');
-
-    demandeForm.addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        
-        const btn = document.getElementById('submitBtn');
-        btn.innerText = "Envoi en cours...";
-        btn.disabled = true;
-
-        const formData = new URLSearchParams(new FormData(this));
-
-        fetch('/envoyerdemande', {
-            method: 'POST',
-            body: formData,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
-        .then(response => {
-            formContainer.innerHTML = `
-                <div class="text-center py-10 success-animation">
-                    <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-10 h-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-serif text-[#1e213a] uppercase tracking-widest mb-4">Envoyé avec succès</h2>
-                    <p class="text-gray-600 font-light mb-8">Votre demande a bien été reçue. Notre expert vous répondra sous 24h ouvrées.</p>
-                    <button onclick="window.location.reload()" class="text-sm font-bold text-[#1e213a] border-b-2 border-[#d8c09d] hover:text-[#d8c09d] transition-colors uppercase tracking-widest">
-                        Envoyer un autre message
-                    </button>
-                </div>
-            `;
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert("Une erreur est survenue lors de l'envoi.");
-            btn.innerText = "Envoyer la demande";
-            btn.disabled = false;
+        // Fermer le menu si on clique sur un lien (mobile)
+        document.querySelectorAll('#menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    menu.classList.add('hidden');
+                    menu.classList.remove('flex');
+                }
+            });
         });
-    });
-</script>
 
+        // 2. ANIMATIONS AU SCROLL (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // 3. GESTION ENVOI FORMULAIRE (AJAX)
+        const demandeForm = document.getElementById('demandeForm');
+        const formContainer = document.getElementById('formContainer');
+
+        if (demandeForm) {
+            demandeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const submitBtn = document.getElementById('submitBtn');
+                
+                // Effet visuel de chargement
+                submitBtn.innerText = "Traitement en cours...";
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                const formData = new URLSearchParams(new FormData(this));
+
+                fetch('/envoyerdemande', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Animation de succès
+                        formContainer.innerHTML = `
+                            <div class="text-center py-16 success-animation">
+                                <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-10 h-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                    </svg>
+                                </div>
+                                <h2 class="text-3xl font-serif text-[#1e213a] uppercase tracking-widest mb-4">Demande reçue</h2>
+                                <p class="text-gray-600 font-light mb-10 max-w-sm mx-auto">Votre demande a été transmise avec succès. Notre expert reviendra vers vous sous 24h.</p>
+                                <button onclick="window.location.reload()" class="text-sm font-bold text-[#1e213a] border-b-2 border-[#d8c09d] hover:text-[#d8c09d] transition-all duration-300 uppercase tracking-widest pb-1">
+                                    Envoyer un nouveau message
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        throw new Error('Erreur serveur');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert("Une erreur technique est survenue. Veuillez réessayer ou nous contacter par téléphone.");
+                    submitBtn.innerText = "Réessayer l'envoi";
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                });
+            });
+        }
+    </script>
 </body>
 </html>

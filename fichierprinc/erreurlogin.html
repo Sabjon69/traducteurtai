@@ -2,25 +2,45 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erreur de connexion</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="icon" type="image/png" href="/img/logo.png">
 </head>
 
-<body class="bg-[#F9F7F2] flex items-center justify-center min-h-screen">
+<body class="bg-[#FDFCFB] flex items-center justify-center min-h-screen p-4">
 
-    <div class="bg-white shadow-xl border border-red-200 rounded-2xl p-10 max-w-md text-center">
-        <h1 class="text-2xl font-bold text-red-600 mb-4">Connexion refusée</h1>
-        <p class="text-gray-600 mb-6">
-            Email ou mot de passe incorrect.<br>
-            Veuillez réessayer.
+    <div class="bg-white shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 rounded-3xl p-8 md:p-12 max-w-sm w-full text-center transition-all">
+        
+        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-50 mb-6">
+            <i data-lucide="shield-alert" class="text-red-500 w-8 h-8"></i>
+        </div>
+
+        <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight mb-2">
+            Connexion refusée
+        </h1>
+        
+        <p class="text-gray-500 leading-relaxed mb-8">
+            L'email ou le mot de passe est incorrect. <br>
+            <span class="text-sm italic">Vérifiez vos identifiants et réessayez.</span>
         </p>
 
-        <a href="/loginclient"
-           class="px-6 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition">
-            Retour au login
-        </a>
+        <div class="space-y-3">
+            <a href="/loginclient"
+               class="block w-full px-6 py-3.5 bg-gray-900 text-white rounded-xl font-bold hover:bg-red-600 transform hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-gray-200">
+                Réessayer
+            </a>
+            
+            <a href="/" class="block text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">
+                Retour à l'accueil
+            </a>
+        </div>
     </div>
 
+    <script>
+      // Initialisation de l'icône
+      lucide.createIcons();
+    </script>
 </body>
 </html>
